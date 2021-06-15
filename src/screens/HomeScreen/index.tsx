@@ -1,12 +1,15 @@
-import React from 'react';
-import {View, Text, FlatList, SafeAreaView} from 'react-native';
+import React, {useContext} from 'react';
+import {View, FlatList, SafeAreaView} from 'react-native';
 import {FlatListItem} from '../../components/FlatListItem';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {theme} from '../../theme/appTheme';
 import {FlatListHeader} from '../../components/FlatListHeader';
 import {menuItems} from '../../data/menuItems';
+import {ThemeContext} from '../../context/theme/ThemeContext';
 
 export default function HomeScreen() {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   return (
     <SafeAreaView style={theme.container}>
       <View>
@@ -17,7 +20,11 @@ export default function HomeScreen() {
           ListHeaderComponent={() => (
             <FlatListHeader title="Opciones del menú" />
           )}
-          ItemSeparatorComponent={() => <View style={theme.separator} />}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{...theme.separator, borderBottomColor: colors.text}}
+            />
+          )}
         />
       </View>
     </SafeAreaView>

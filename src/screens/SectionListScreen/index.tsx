@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, SafeAreaView, SectionList, Text} from 'react-native';
 import HeaderTitle from '../../components/HeaderTitle';
+import {ThemeContext} from '../../context/theme/ThemeContext';
 import {casas} from '../../data/sectionItems';
 import {theme} from '../../theme/appTheme';
 
 export default function SectionListScreen() {
+  const {
+    theme: {colors},
+  } = useContext(ThemeContext);
   return (
     <SafeAreaView>
       <View style={theme.container}>
@@ -15,7 +19,9 @@ export default function SectionListScreen() {
           ListFooterComponent={() => (
             <Text>{'Total de casas ' + casas.length}</Text>
           )}
-          renderItem={({item}) => <Text>{item}</Text>}
+          renderItem={({item}) => (
+            <Text style={{color: colors.text}}>{item}</Text>
+          )}
           renderSectionHeader={({section}) => (
             <HeaderTitle title={section.casa} />
           )}
